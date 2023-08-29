@@ -1,9 +1,4 @@
-{% extends "base.html" %}
-
-
-{% block content %}
-
-    {% if messages %}
+{% if messages %}
     <div class="messages">
         <ul class='messages'>
             {% for message in messages %}
@@ -11,6 +6,4 @@
             {% endfor %}
         </ul>
     </div>
-    {% endif %}
-
-{% endblock content %}
+{% endif %}
