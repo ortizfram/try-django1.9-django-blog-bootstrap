@@ -3,15 +3,24 @@
 
 {% block content %}
 
-<h1>{{title}} working!</h1>
+        <h1>{{title}}</h1>
 
+        <div class="row">
         {% for obj in object_list %}
-            {% comment %} <a href='{% url "detail" id=obj.id %}'>{{ obj.title}}</a><br/> {% endcomment %}
-            <a href='{{ obj.get_absolute_url }}'><h2>{{ obj.title}}</h2></a><br/>
-            {{ obj.content}}<br/>
-            {{ obj.timestamp}}<br/>
-            {{ obj.updated}}<br/>
-            {{ obj.id}}<br/>
-        {% endfor %}
 
+            <div class="col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="#" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-title"><a href='{{ obj.get_absolute_url }}'>{{ obj.title}}</a><small>{{ obj.timestamp|timesince}}</small></h3>
+                        <p class="card-text">{{ obj.content|linebreaks|truncatechars:120}}</p>
+                        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+            
 {% endblock content %}
