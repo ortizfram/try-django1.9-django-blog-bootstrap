@@ -1,5 +1,5 @@
 # apps/posts/views.py
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
@@ -55,5 +55,7 @@ def post_update(request, id):
     return render(request, "post_form.html", context)
 
 def post_delete(request):
+    instance = get_object_or_404(Post, id=id)
+    instance.delete()
     messages.success(request, "Successfully deleted")
-    return HttpResponse("<h1>delete</h1>")
+    return redirect("posts:list")
