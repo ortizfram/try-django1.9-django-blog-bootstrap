@@ -10,7 +10,8 @@
 
     {% for obj in object_list %}
 
-        <a href='{% url "detail" id=obj.id %}'>{{ obj.title}}</a><br/>
+        {% comment %} <a href='{% url "detail" id=obj.id %}'>{{ obj.title}}</a><br/> {% endcomment %}
+        <a href='{{ obj.get_absolute_url }}'>{{ obj.title}}</a><br/>
         {{ obj.content}}<br/>
         {{ obj.timestamp}}<br/>
         {{ obj.updated}}<br/>
