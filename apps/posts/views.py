@@ -13,7 +13,7 @@ def post_detail(request, id): # retrieve
     # instance = Post.objects.get(id=1)
     instance = get_object_or_404(Post, id=id)
     context = {
-        "title" : "Detail",
+        "title" : instance.title,
         "instance" : instance
     }
     return render(request, "post_detail.html", context)
