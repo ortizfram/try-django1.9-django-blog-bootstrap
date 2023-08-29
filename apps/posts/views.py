@@ -1,6 +1,7 @@
 # apps/posts/views.py
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 
 from .models import Post
 from .forms import PostForm
@@ -13,6 +14,7 @@ def post_create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        messages.success(request, "Successfully Created")
         return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "form": form,
@@ -43,6 +45,7 @@ def post_update(request, id):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "title" : instance.title,
@@ -52,4 +55,5 @@ def post_update(request, id):
     return render(request, "post_form.html", context)
 
 def post_delete(request):
+    messages.success(request, "Successfully deleted")
     return HttpResponse("<h1>delete</h1>")
