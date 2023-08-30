@@ -29,7 +29,7 @@ class Post(models.Model):
     
     # comes from posts.urls 'detail'
     def get_absolute_url(self):
-        return "/posts/%s/" %(self.id)
+        return "/posts/%s/" %(self.slug)
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
@@ -42,7 +42,7 @@ def create_slug(instance, new_slug=None): # recursive function
     qs = Post.objects.filter(slug=slug).order_by("-id")
     exists = qs.exists()
     if exists:
-        new_slug = "%s-%s" %(slug, qs.first().id)
+        new_slug = f"{slug}-{qs.first().id}"
         return create_slug(instance, new_slug=new_slug)
     return slug
 

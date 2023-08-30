@@ -25,12 +25,13 @@ def post_create(request):
     }
     return render(request, "post_form.html", context)
 
-def post_detail(request, id): # retrieve
+def post_detail(request, slug): # retrieve
     # instance = Post.objects.get(id=1)
-    instance = get_object_or_404(Post, id=id)
+    instance = get_object_or_404(Post, slug=slug)
     context = {
         "title" : instance.title,
-        "instance" : instance
+        "instance" : instance,
+        "slug": instance.slug,
     }
     return render(request, "post_detail.html", context)
 
@@ -41,28 +42,29 @@ def post_list(request): #list items
     page_obj = paginator.get_page(page_number)
     context = {
         "object_list" : page_obj,
-        "title" : "List"
+        "title" : "List",
     }
     return render(request, "post_list.html", context)
 
 
-def post_update(request, id):
-    instance = get_object_or_404(Post, id=id)
+def post_update(request, slug):
+    instance = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance ) #from forms.py
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
+        messages.success(request, "Item Saved", extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "title" : instance.title,
         "instance": instance,
         "form": form,
+        "slug": instance.slug,
     }
     return render(request, "post_form.html", context)
 
-def post_delete(request, id=None):
-    instance = get_object_or_404(Post, id=id)
+def post_delete(request, slug=None):
+    instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect(reverse('list'))
