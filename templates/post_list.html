@@ -10,7 +10,9 @@
         {% for obj in object_list %}
             <div class="col-sm-6 col-lg-4 mb-4">
                 <div class="card">
-                    <img src="#" class="card-img-top" alt="Post Image">
+                    {% if obj.image %}
+                        <img src="{{ obj.image.url }}" class="card-img-top img-fluid" alt="Post Image">
+                    {% endif %}
                     <div class="card-body">
                         <div class='row'>
                             <div class="col-md-8">

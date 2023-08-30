@@ -113,7 +113,9 @@ STAICFILES_DIRS = [
 
 # CDN => content delivey network
 STATIC_ROOT = os.path.join(BASE_DIR,"static_cdn")
+
 MEDIA_ROOT = os.path.join(BASE_DIR,"media_cdn")
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -14,7 +14,7 @@ from django.core.paginator import Paginator
 
 def post_create(request):
     # make fields requested or POST
-    form = PostForm(request.POST or None) #from forms.py
+    form = PostForm(request.POST or None, request.FILES or None) #from forms.py
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -48,7 +48,7 @@ def post_list(request): #list items
 
 def post_update(request, id):
     instance = get_object_or_404(Post, id=id)
-    form = PostForm(request.POST or None, instance=instance) #from forms.py
+    form = PostForm(request.POST or None, request.FILES or None, instance=instance ) #from forms.py
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()

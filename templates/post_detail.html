@@ -7,6 +7,9 @@
     <div class="col-sm-6 col-sm-offset-3 p-5">
 
         <button href='{% url "update" id=instance.id %}'>Edit</button><br/>
+        {% if obj.image %}
+            <img src='{{ instance.image.url }}' class='img-fluid'/>
+        {% endif %}
         <h1>{{instance.title}}</h1><small>{{ instance.timestamp}}</small><br/>
         {{ instance.content|linebreaks}}<br/>
   
