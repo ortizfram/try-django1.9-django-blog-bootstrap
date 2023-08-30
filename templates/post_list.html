@@ -14,9 +14,9 @@
                     <div class="card-body">
                         <div class='row'>
                             <div class="col-md-8">
-                                <h3 class="card-title"><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3>
+                                <h3 class="card-title"><a class='text-decoration-none fw-bold' href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 text-muted">
                                 <p class='font-size-sm'>{{ obj.timestamp|timesince }} ago</p>
                             </div>
                         </div>
