@@ -18,16 +18,16 @@
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
                 Facebook</a>
             <!-- Share on X anchortag-->
-            <a href="https://twitter.com/home?status=I'm%20going%20to%20learn%20to%20Code...%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@ortizfram%20{{ request.build_absolute_uri }}">
+            <a href="https://x.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
                 X</a>
             <!-- Share on GooglePlus anchortag-->
             <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
                 Google+</a>
             <!-- Share on Linkedin anchortag-->
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ intance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
                 Linkedin</a>
             <!-- Share on Reddit anchortag-->
-            <a href="http://www.reddit.com/submit?{{ request.build_absolute_uri }}&title=Unlock%20to%20Learn%20Swift%20for%20Free!%20By%20Swift%20for%20Entrepreneurs.%20Made%20for%20Non%20Techincals.">
+            <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">
                 Reddit</a>
         </div>
         {{ instance.content|linebreaks}}<br/>

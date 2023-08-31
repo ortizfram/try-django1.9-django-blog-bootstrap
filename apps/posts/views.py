@@ -9,6 +9,8 @@ from .forms import PostForm
 
 from django.core.paginator import Paginator
 
+from urllib.parse import quote_plus
+
 
 # Create your views here.
 
@@ -28,10 +30,12 @@ def post_create(request):
 def post_detail(request, slug): # retrieve
     # instance = Post.objects.get(id=1)
     instance = get_object_or_404(Post, slug=slug)
+    share_string = quote_plus(instance.content)
     context = {
         "title" : instance.title,
         "instance" : instance,
         "slug": instance.slug,
+        'share_string': share_string,
     }
     return render(request, "post_detail.html", context)
 
