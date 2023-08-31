@@ -16,21 +16,18 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}">
     <script src="https://kit.fontawesome.com/98d1538458.js" crossorigin="anonymous"></script>
-
 </head>
+
 <body>
-    <!-- Facebook Comments -->
+    {% comment %} <!-- Facebook Comments --> {% endcomment %}
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0&appId=934289161245127&autoLogAppEvents=1" nonce="bJGwAcpK"></script>
-    {% include "messages_display.html" %}
-    
-    <!-- Facebook Like button -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0" nonce="IBUd0LEy"></script>
+    {% comment %} <!-- Facebook Like button --> {% endcomment %}
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v17.0" nonce="wHToydUZ"></script>
 
     <div class="container">
         {% block content %} {% endblock content %}
     </div>
-    
 </body>
 </html>
