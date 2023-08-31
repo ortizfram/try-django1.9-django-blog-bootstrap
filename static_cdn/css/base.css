@@ -1,3 +1,8 @@
 h2 {
   color: #777777
 }
+
+.fixed-width-img {
+  width: 100%; /* Set the width as needed */
+  max-width: 900px; /* Adjust this value as desired */
+}
