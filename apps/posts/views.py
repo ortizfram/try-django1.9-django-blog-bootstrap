@@ -32,6 +32,7 @@ def post_create(request):
 def post_detail(request, slug): # retrieve
     # instance = Post.objects.get(id=1)
     instance = get_object_or_404(Post, slug=slug)
+    instance.user = request.user
     share_string = quote_plus(instance.content)
     context = {
         "title" : instance.title,
