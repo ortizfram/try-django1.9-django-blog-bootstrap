@@ -51,7 +51,12 @@
                 <p>Author: {{ instance.user.get_full_name }}</p><br/><!-- {{ instance.user }} is the same-->
                 {% endif %}
                 <h5 class='pt-3'>{{instance.content}}</h5>
+
+                <div class='facebook-comments-block'>
+                    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="" data-numposts="5"></div>
+                </div>
             </div>
+
     </div>
 </div>
 
