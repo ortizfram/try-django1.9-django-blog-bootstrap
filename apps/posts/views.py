@@ -10,6 +10,7 @@ from .forms import PostForm
 from django.core.paginator import Paginator
 
 from urllib.parse import quote_plus
+from django.db.models import Q
 
 from django.utils import timezone
 
@@ -53,6 +54,15 @@ def post_list(request): #list items
     queryset_list = Post.objects.active() #all() -->not to see 404 on drafts from model  #.filter(draft=False).order_by("-timestamp")
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all() 
+        
+    query = request.GET.get("q") #input name of searchbar
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query) 
+        ).distinct()
     paginator = Paginator(queryset_list, 6)  # Show 6 posts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
