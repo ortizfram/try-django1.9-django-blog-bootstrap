@@ -17,7 +17,7 @@
                                 <h3 class="card-title"><a class='text-decoration-none fw-bold' href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3>
                             </div>
                             <div class="col-md-4 text-muted">
-                                <p class='font-size-sm'>{{ obj.timestamp|timesince }} ago</p>
+                                <p class='font-size-sm'>{{ obj.publish|timesince }}</p>
                             </div>
                         </div>
                         {% if obj.user.get_full_name  %}
