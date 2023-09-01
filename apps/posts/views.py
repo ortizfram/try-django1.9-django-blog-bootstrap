@@ -11,6 +11,8 @@ from django.core.paginator import Paginator
 
 from urllib.parse import quote_plus
 
+from django.utils import timezone
+
 
 # Create your views here.
 
@@ -30,9 +32,12 @@ def post_create(request):
     return render(request, "post_form.html", context)
 
 def post_detail(request, slug): # retrieve
-    # instance = Post.objects.get(id=1)
+    #=> drafts can be seen by 'staff or superuser', and annon only if publish < today. else 404
     instance = get_object_or_404(Post, slug=slug)
-    instance.user = request.user
+    if instance.draft or instance.publish > timezone.now().date(): 
+        if not request.user.is_staff or not request.user.is_superuser: # change in /admin/
+            raise Http404
+    # instance.user = request.user #-> require auth to see
     share_string = quote_plus(instance.content)
     context = {
         "title" : instance.title,
@@ -43,13 +48,18 @@ def post_detail(request, slug): # retrieve
     return render(request, "post_detail.html", context)
 
 def post_list(request): #list items
-    queryset_list = Post.objects.all().order_by("-timestamp")
+    #=> staff and superuser can see drafts 
+    today = timezone.now().date()
+    queryset_list = Post.objects.active() #all() -->not to see 404 on drafts from model  #.filter(draft=False).order_by("-timestamp")
+    if request.user.is_staff or request.user.is_superuser:
+        queryset_list = Post.objects.all() 
     paginator = Paginator(queryset_list, 6)  # Show 6 posts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
         "object_list" : page_obj,
         "title" : "List",
+        "today":today,
     }
     return render(request, "post_list.html", context)
 
